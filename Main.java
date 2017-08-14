@@ -54,12 +54,6 @@ public class Main {
         duplicatedCards = result;
     }
 
-    public void printDuplicatedCards() {
-        for (Map.Entry<String, Integer> pair : duplicatedCards.entrySet()) {
-            System.out.printf("%s : %d\n", pair.getKey(), pair.getValue());
-        }
-    }
-
     public void saveDuplicatedCards() throws IOException {
         try (FileWriter writer = new FileWriter("/home/igor/duplicatedContacts")) {
             for (Map.Entry<String, Integer> pair : duplicatedCards.entrySet()) {
@@ -74,6 +68,5 @@ public class Main {
         app.gettingCards();
         app.gettingDuplicateNumbers();
         app.saveDuplicatedCards();
-        app.printDuplicatedCards();
     }
 }
