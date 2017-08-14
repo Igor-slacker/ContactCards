@@ -7,14 +7,17 @@ import java.util.List;
 import java.util.Map;
 
 public class Main {
+    private String filePath;
     private Map<String, Integer> duplicatedCards;
     private List<Card> cards = new LinkedList<>();
 
     public void gettingCards() throws IOException {
         BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
 
-        System.out.println("Input path to contacts file");
-        try (BufferedReader contacts = new BufferedReader(new FileReader(reader.readLine()))) {
+        System.out.println("Input path to contact's file/n" +
+                "Be careful! This file will be override");
+        filePath=reader.readLine();
+        try (BufferedReader contacts = new BufferedReader(new FileReader(filePath))) {
             StringBuilder cardContent = new StringBuilder();
             String phoneNumber = null;
             String name = null;
