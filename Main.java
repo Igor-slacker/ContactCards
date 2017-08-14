@@ -69,6 +69,12 @@ public class Main {
         }
     }
 
+    public void removeSelectedCards(int...indexes){
+        for (int index:indexes){
+            cards.remove(index);
+        }
+    }
+
 
     public static void main(String[] args) throws IOException {
         Main app = new Main();
