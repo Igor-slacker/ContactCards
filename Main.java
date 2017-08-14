@@ -14,9 +14,9 @@ public class Main {
     public void gettingCards() throws IOException {
         BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
 
-        System.out.println("Input path to contact's file/n" +
+        System.out.println("Input path to contacts file/n" +
                 "Be careful! This file will be override");
-        filePath=reader.readLine();
+        filePath = reader.readLine();
         try (BufferedReader contacts = new BufferedReader(new FileReader(filePath))) {
             StringBuilder cardContent = new StringBuilder();
             String phoneNumber = null;
@@ -65,16 +65,24 @@ public class Main {
         }
     }
 
-    public void printDuplicateCards(String phoneNumber){
-        for (Card card:cards){
+    public void printDuplicateCards(String phoneNumber) {
+        for (Card card : cards) {
             if (card.getPhoneNumber().equals(phoneNumber))
-                System.out.printf("%dddd :   %s /n",cards.indexOf(card),card.getName());
+                System.out.printf("%dddd :   %s /n", cards.indexOf(card), card.getName());
         }
     }
 
-    public void removeSelectedCards(int...indexes){
-        for (int index:indexes){
+    public void removeSelectedCards(int... indexes) {
+        for (int index : indexes) {
             cards.remove(index);
+        }
+    }
+
+    public void saveCardsToFile() throws IOException {
+        try (FileWriter writer = new FileWriter(filePath)) {
+            for (Card card : cards) {
+                writer.write(card.getContent());
+            }
         }
     }
 
