@@ -14,7 +14,7 @@ public class Main {
     public void gettingCards() throws IOException {
         BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
 
-        System.out.println("Input path to contacts file/n" +
+        System.out.println("Input path to contacts file\n" +
                 "Be careful! This file will be override");
         filePath = reader.readLine();
         try (BufferedReader contacts = new BufferedReader(new FileReader(filePath))) {
@@ -23,7 +23,7 @@ public class Main {
             String name = null;
             while (contacts.ready()) {
                 String string = contacts.readLine();
-                if (!string.equals("/n")) {
+                if (!string.equals("\n")) {
                     if (string.startsWith("TEL;CELL"))
                         phoneNumber = string.substring(string.length() - 10);
                     if (string.startsWith(""))
@@ -68,7 +68,7 @@ public class Main {
     public void printDuplicateCards(String phoneNumber) {
         for (Card card : cards) {
             if (card.getPhoneNumber().equals(phoneNumber))
-                System.out.printf("%dddd :   %s /n", cards.indexOf(card), card.getName());
+                System.out.printf("%dddd :   %s \n", cards.indexOf(card), card.getName());
         }
     }
 
