@@ -8,33 +8,42 @@ import java.util.Map;
 
 public class Main {
     private Map<String, Integer> duplicatedCards;
-    private InputStream contacts;
+    private List<Card> cards = new LinkedList<>();
 
-    public void getingContacts() throws IOException {
+    public void gettingCards() throws IOException {
+        BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
+
         System.out.println("Input path to contacts file");
-
-        try (BufferedReader reader = new BufferedReader(new InputStreamReader(System.in))) {
-            contacts = new FileInputStream(reader.readLine());
-        }
-    }
-
-    public void getingDuplicateNumbers() throws IOException {
-        List<String> numbers = new LinkedList<>();
-        Map<String, Integer> result = new HashMap<>();
-        try (BufferedReader reader = new BufferedReader(new InputStreamReader(contacts))) {
-            while (reader.ready()) {
-                String s = reader.readLine();
-                if (s.startsWith("TEL;CELL")) {
-                    numbers.add(s.substring(s.length() - 10));
+        try (BufferedReader contacts = new BufferedReader(new FileReader(reader.readLine()))) {
+            StringBuilder cardContent = new StringBuilder();
+            String phoneNumber = null;
+            String name = null;
+            while (contacts.ready()) {
+                String string = contacts.readLine();
+                if (!string.equals("/n")) {
+                    if (string.startsWith("TEL;CELL"))
+                        phoneNumber = string.substring(string.length() - 10);
+                    if (string.startsWith(""))
+                        name = string;
+                    cardContent.append(string);
+                } else {
+                    cards.add(new Card(phoneNumber, name, cardContent.toString()));
+                    cardContent.setLength(0);
+                    phoneNumber = null;
+                    name = null;
                 }
             }
         }
+    }
 
-        for (int i = 0; i < numbers.size(); i++) {
-            String number = numbers.get(i);
+    public void gettingDuplicateNumbers() throws IOException {
+        Map<String, Integer> result = new HashMap<>();
+
+        for (int i = 0; i < cards.size(); i++) {
+            String number = cards.get(i).getPhoneNumber();
             if (!result.containsKey(number)) {
-                for (int j = i + 1; j < numbers.size(); j++) {
-                    if (number.equals(numbers.get(j))) {
+                for (int j = i + 1; j < cards.size(); j++) {
+                    if (number.equals(cards.get(j).getPhoneNumber())) {
                         int quantity = result.containsKey(number) ? result.get(number) + 1 : 2;
                         result.put(number, quantity);
                     }
@@ -59,16 +68,12 @@ public class Main {
         }
     }
 
-    public void close() throws IOException {
-        contacts.close();
-    }
 
     public static void main(String[] args) throws IOException {
         Main app = new Main();
-        app.getingContacts();
-        app.getingDuplicateNumbers();
+        app.gettingCards();
+        app.gettingDuplicateNumbers();
         app.saveDuplicatedCards();
         app.printDuplicatedCards();
-        app.close();
     }
 }
