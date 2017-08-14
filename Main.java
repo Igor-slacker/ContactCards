@@ -62,6 +62,13 @@ public class Main {
         }
     }
 
+    public void printDuplicateCards(String phoneNumber){
+        for (Card card:cards){
+            if (card.getPhoneNumber().equals(phoneNumber))
+                System.out.printf("%dddd :   %s /n",cards.indexOf(card),card.getName());
+        }
+    }
+
 
     public static void main(String[] args) throws IOException {
         Main app = new Main();
