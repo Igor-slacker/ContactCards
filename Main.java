@@ -8,6 +8,7 @@ import java.util.Map;
 
 public class Main {
     private String filePath;
+    private String duplicatedContactsFile="/home/igor/duplicatedContacts";
     private Map<String, Integer> duplicatedCards;
     private List<Card> cards = new LinkedList<>();
 
@@ -58,7 +59,7 @@ public class Main {
     }
 
     public void saveDuplicatedCards() throws IOException {
-        try (FileWriter writer = new FileWriter("/home/igor/duplicatedContacts")) {
+        try (FileWriter writer = new FileWriter(duplicatedContactsFile)) {
             for (Map.Entry<String, Integer> pair : duplicatedCards.entrySet()) {
                 writer.write(pair.getKey() + " : " + pair.getValue() + "\n");
             }
