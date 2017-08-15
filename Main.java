@@ -115,5 +115,6 @@ public class Main {
         app.saveDuplicatedCards();
 
         app.removingProcess();
+        app.saveCardsToFile();
     }
 }
