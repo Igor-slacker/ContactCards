@@ -8,7 +8,7 @@ import java.util.Map;
 
 public class Main {
     private String filePath;
-    private String duplicatedContactsFile="/home/igor/duplicatedContacts";
+    private String duplicatedContactsFile = "/home/igor/duplicatedContacts";
     private Map<String, Integer> duplicatedCards;
     private List<Card> cards = new LinkedList<>();
 
@@ -87,11 +87,33 @@ public class Main {
         }
     }
 
+    public Map<String, Integer> getDuplicatedCards() {
+        return duplicatedCards;
+    }
+
+    private void removingProcess() throws IOException {
+        BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
+        System.out.println("Choose indexes of the cards(separated by comma) which you want to remove");
+        for (Map.Entry<String, Integer> pair :
+                getDuplicatedCards().entrySet()) {
+            printDuplicateCards(pair.getKey());
+
+            String[] indexesString = reader.readLine().split(",");
+            int[] indexes = new int[indexesString.length];
+            for (int i = 0; i < indexes.length; i++) {
+                indexes[i] = Integer.parseInt(indexesString[i].trim());
+            }
+
+            removeSelectedCards(indexes);
+        }
+    }
 
     public static void main(String[] args) throws IOException {
         Main app = new Main();
         app.gettingCards();
         app.gettingDuplicateNumbers();
         app.saveDuplicatedCards();
+
+        app.removingProcess();
     }
 }
