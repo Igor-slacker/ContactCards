@@ -93,18 +93,22 @@ public class Main {
 
     private void removingProcess() throws IOException {
         BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
-        System.out.println("Choose indexes of the cards(separated by comma) which you want to remove");
+        System.out.println("Choose indexes of the cards(separated by comma) which you want to remove\n" +
+                "or press enter if you don't want to remove any card");
         for (Map.Entry<String, Integer> pair :
                 getDuplicatedCards().entrySet()) {
             printDuplicateCards(pair.getKey());
 
-            String[] indexesString = reader.readLine().split(",");
-            int[] indexes = new int[indexesString.length];
-            for (int i = 0; i < indexes.length; i++) {
-                indexes[i] = Integer.parseInt(indexesString[i].trim());
-            }
+            String readedSt=reader.readLine();
+            if (!readedSt.equals("")) {
+                String[] indexesString = readedSt.split(",");
+                int[] indexes = new int[indexesString.length];
+                for (int i = 0; i < indexes.length; i++) {
+                    indexes[i] = Integer.parseInt(indexesString[i].trim());
+                }
 
-            removeSelectedCards(indexes);
+                removeSelectedCards(indexes);
+            }
         }
     }
 
@@ -115,7 +119,7 @@ public class Main {
 //        app.saveDuplicatedCards();
 
         app.removingProcess();
-//        app.saveCardsToFile();
+        app.saveCardsToFile();
         /*
         test
          */
