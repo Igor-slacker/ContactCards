@@ -69,7 +69,7 @@ public class Main {
     public void printDuplicateCards(String phoneNumber) {
         for (Card card : cards) {
             if (card.getPhoneNumber().equals(phoneNumber))
-                System.out.printf("%dddd :   %s \n", cards.indexOf(card), card.getName());
+                System.out.printf("%d :   %s \n", cards.indexOf(card), card.getName());
         }
     }
 
@@ -111,14 +111,14 @@ public class Main {
     public static void main(String[] args) throws IOException {
         Main app = new Main();
         app.gettingCards();
-//        app.gettingDuplicateNumbers();
+        app.gettingDuplicateNumbers();
 //        app.saveDuplicatedCards();
-//
-//        app.removingProcess();
+
+        app.removingProcess();
 //        app.saveCardsToFile();
         /*
         test
          */
-        System.out.println(app.cards.get(0).getName()+"\n\n"+app.cards.get(0).getPhoneNumber()+"\n\n"+app.cards.get(0).getContent());
+//        System.out.println(app.cards.get(0).getName()+"\n\n"+app.cards.get(0).getPhoneNumber()+"\n\n"+app.cards.get(0).getContent());
     }
 }
