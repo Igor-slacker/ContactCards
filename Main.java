@@ -82,7 +82,7 @@ public class Main {
     public void saveCardsToFile() throws IOException {
         try (FileWriter writer = new FileWriter(filePath)) {
             for (Card card : cards) {
-                writer.write(card.getContent());
+                writer.write(card.getContent()+"\n");
             }
         }
     }
