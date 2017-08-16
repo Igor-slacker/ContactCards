@@ -74,8 +74,8 @@ public class Main {
     }
 
     public void removeSelectedCards(int... indexes) {
-        for (int index : indexes) {
-            cards.remove(index);
+        for (int i = 0; i < indexes.length; i++) {
+            cards.remove(indexes[i]-i);
         }
     }
 
