@@ -25,7 +25,7 @@ public class Main {
             while (contacts.ready()) {
                 String string = contacts.readLine();
                 if (!string.equals("")) {
-                    if (string.startsWith("TEL;CELL"))
+                    if (string.startsWith("TEL;"))
                         phoneNumber = string.substring(string.length() - 10);
                     if (string.startsWith("N:"))
                         name = string.substring(2);
