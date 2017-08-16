@@ -24,12 +24,12 @@ public class Main {
             String name = null;
             while (contacts.ready()) {
                 String string = contacts.readLine();
-                if (!string.equals("\n")) {
+                if (!string.equals("")) {
                     if (string.startsWith("TEL;CELL"))
                         phoneNumber = string.substring(string.length() - 10);
-                    if (string.startsWith(""))
-                        name = string;
-                    cardContent.append(string);
+                    if (string.startsWith("N:"))
+                        name = string.substring(2);
+                    cardContent.append(string+"\n");
                 } else {
                     cards.add(new Card(phoneNumber, name, cardContent.toString()));
                     cardContent.setLength(0);
@@ -111,10 +111,14 @@ public class Main {
     public static void main(String[] args) throws IOException {
         Main app = new Main();
         app.gettingCards();
-        app.gettingDuplicateNumbers();
-        app.saveDuplicatedCards();
-
-        app.removingProcess();
-        app.saveCardsToFile();
+//        app.gettingDuplicateNumbers();
+//        app.saveDuplicatedCards();
+//
+//        app.removingProcess();
+//        app.saveCardsToFile();
+        /*
+        test
+         */
+        System.out.println(app.cards.get(0).getName()+"\n\n"+app.cards.get(0).getPhoneNumber()+"\n\n"+app.cards.get(0).getContent());
     }
 }
