@@ -39,13 +39,17 @@ public class CardsCollection {
     }
 
     public void gettingDuplicateNumbers() throws IOException {
+        gettingDuplicateNumbers(cards);
+    }
+
+    public void gettingDuplicateNumbers(List<Card>comparableCards) throws IOException {
         List<String> result = new LinkedList<>();
 
         for (int i = 0; i < cards.size(); i++) {
             String number = cards.get(i).getPhoneNumber();
             if (!result.contains(number)) {
-                for (int j = i + 1; j < cards.size(); j++) {
-                    if (number.equals(cards.get(j).getPhoneNumber())) {
+                for (int j = 0; j < comparableCards.size(); j++) {
+                    if (number.equals(comparableCards.get(j).getPhoneNumber())) {
                         result.add(number);
                     }
                 }
