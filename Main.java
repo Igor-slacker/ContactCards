@@ -91,7 +91,7 @@ public class Main {
         return duplicatedCards;
     }
 
-    private void removingProcess() throws IOException {
+    private void removeDuplicateddCards() throws IOException {
         BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
         System.out.println("Choose indexes of the cards(separated by comma) which you want to remove\n" +
                 "or press enter if you don't want to remove any card");
@@ -118,7 +118,7 @@ public class Main {
         app.gettingDuplicateNumbers();
 //        app.saveDuplicatedCards();
 
-        app.removingProcess();
+        app.removeDuplicateddCards();
         app.saveCardsToFile();
         /*
         test
