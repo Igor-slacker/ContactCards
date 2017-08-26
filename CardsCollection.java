@@ -1,15 +1,13 @@
 package igor.contactCards;
 
 import java.io.*;
-import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
-import java.util.Map;
 
 public class CardsCollection {
     private String filePath;
     private String duplicatedContactsFile = "/home/igor/duplicatedContacts";
-    private Map<String, Integer> duplicatedCards;
+    private List<String> duplicatedCards;
     private List<Card> cards = new LinkedList<>();
 
     public void gettingCards() throws IOException {
@@ -29,7 +27,7 @@ public class CardsCollection {
                         phoneNumber = string.substring(string.length() - 10);
                     if (string.startsWith("N:"))
                         name = string.substring(2);
-                    cardContent.append(string+"\n");
+                    cardContent.append(string + "\n");
                 } else {
                     cards.add(new Card(phoneNumber, name, cardContent.toString()));
                     cardContent.setLength(0);
@@ -41,15 +39,14 @@ public class CardsCollection {
     }
 
     public void gettingDuplicateNumbers() throws IOException {
-        Map<String, Integer> result = new HashMap<>();
+        List<String> result = new LinkedList<>();
 
         for (int i = 0; i < cards.size(); i++) {
             String number = cards.get(i).getPhoneNumber();
-            if (!result.containsKey(number)) {
+            if (!result.contains(number)) {
                 for (int j = i + 1; j < cards.size(); j++) {
                     if (number.equals(cards.get(j).getPhoneNumber())) {
-                        int quantity = result.containsKey(number) ? result.get(number) + 1 : 2;
-                        result.put(number, quantity);
+                        result.add(number);
                     }
                 }
             }
@@ -60,8 +57,8 @@ public class CardsCollection {
 
     public void saveDuplicatedCards() throws IOException {
         try (FileWriter writer = new FileWriter(duplicatedContactsFile)) {
-            for (Map.Entry<String, Integer> pair : duplicatedCards.entrySet()) {
-                writer.write(pair.getKey() + " : " + pair.getValue() + "\n");
+            for (String phoneNumber : duplicatedCards) {
+                writer.write(phoneNumber + "\n");
             }
         }
     }
@@ -75,33 +72,29 @@ public class CardsCollection {
 
     public void removeSelectedCards(int... indexes) {
         for (int i = 0; i < indexes.length; i++) {
-            cards.remove(indexes[i]-i);
+            cards.remove(indexes[i] - i);
         }
     }
 
     public void saveCardsToFile() throws IOException {
         try (FileWriter writer = new FileWriter(filePath)) {
             for (Card card : cards) {
-                writer.write(card.getContent()+"\n");
+                writer.write(card.getContent() + "\n");
             }
         }
     }
 
-    public Map<String, Integer> getDuplicatedCards() {
-        return duplicatedCards;
-    }
 
     public void removeDuplicateddCards() throws IOException {
         BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
         System.out.println("Choose indexes of the cards(separated by comma) which you want to remove\n" +
                 "or press enter if you don't want to remove any card");
-        for (Map.Entry<String, Integer> pair :
-                getDuplicatedCards().entrySet()) {
-            printDuplicateCards(pair.getKey());
+        for (String phoneNumber : duplicatedCards) {
+            printDuplicateCards(phoneNumber);
 
-            String readedSt=reader.readLine();
-            if (!readedSt.equals("")) {
-                String[] indexesString = readedSt.split(",");
+            String readSt = reader.readLine();
+            if (!readSt.equals("")) {
+                String[] indexesString = readSt.split(",");
                 int[] indexes = new int[indexesString.length];
                 for (int i = 0; i < indexes.length; i++) {
                     indexes[i] = Integer.parseInt(indexesString[i].trim());
