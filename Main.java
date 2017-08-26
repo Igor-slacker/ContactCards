@@ -3,16 +3,19 @@ package igor.contactCards;
 import java.io.IOException;
 
 public class Main {
-    public static void processMainCardsCollection(CardsCollection cardsCollection) throws IOException {
-        cardsCollection.gettingCards();
-        cardsCollection.gettingDuplicateNumbers();
-//        cardsCollection.saveDuplicatedCards();
+    private static CardsCollection mainCardsCollection;
+    private static CardsCollection updatedCardsCollection;
 
-        cardsCollection.removeDuplicateddCards();
-        cardsCollection.saveCardsToFile();
+    public static void processMainCardsCollection() throws IOException {
+        mainCardsCollection.gettingCards();
+        mainCardsCollection.gettingDuplicateNumbers();
+//        mainCardsCollection.saveDuplicatedCards();
+
+        mainCardsCollection.removeDuplicateddCards();
+        mainCardsCollection.saveCardsToFile();
     }
 
-    private static void processUpdatedCardsCollection(CardsCollection mainCardsCollection, CardsCollection updatedCardsCollection) throws IOException {
+    public static void processUpdatedCardsCollection() throws IOException {
         updatedCardsCollection.gettingCards();
         updatedCardsCollection.gettingDuplicateNumbers(mainCardsCollection.getCards());
 //        updatedCardsCollection.saveDuplicatedCards();
@@ -21,10 +24,10 @@ public class Main {
     }
 
     public static void main(String[] args) throws IOException {
-        CardsCollection mainCardsCollection = new CardsCollection();
-        processMainCardsCollection(mainCardsCollection);
+        mainCardsCollection = new CardsCollection();
+        processMainCardsCollection();
 
-        CardsCollection updatedCardsCollection = new CardsCollection();
-        processUpdatedCardsCollection(mainCardsCollection,updatedCardsCollection);
+        updatedCardsCollection = new CardsCollection();
+        processUpdatedCardsCollection();
     }
 }
