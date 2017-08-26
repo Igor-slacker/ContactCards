@@ -3,7 +3,7 @@ package igor.contactCards;
 import java.io.IOException;
 
 public class Main {
-    public static void processDuplicatedCards(CardsCollection cardsCollection) throws IOException {
+    public static void processMainCardsCollection(CardsCollection cardsCollection) throws IOException {
         cardsCollection.gettingCards();
         cardsCollection.gettingDuplicateNumbers();
 //        mainCardsCollection.saveDuplicatedCards();
@@ -19,8 +19,8 @@ public class Main {
 
     public static void main(String[] args) throws IOException {
         CardsCollection mainCardsCollection = new CardsCollection();
-        processDuplicatedCards(mainCardsCollection);
+        processMainCardsCollection(mainCardsCollection);
 
 
-        }
+    }
 }
