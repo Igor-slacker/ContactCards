@@ -91,7 +91,7 @@ public class CardsCollection {
         return duplicatedCards;
     }
 
-    private void removeDuplicateddCards() throws IOException {
+    public void removeDuplicateddCards() throws IOException {
         BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
         System.out.println("Choose indexes of the cards(separated by comma) which you want to remove\n" +
                 "or press enter if you don't want to remove any card");
@@ -110,19 +110,5 @@ public class CardsCollection {
                 removeSelectedCards(indexes);
             }
         }
-    }
-
-    public static void main(String[] args) throws IOException {
-        CardsCollection app = new CardsCollection();
-        app.gettingCards();
-        app.gettingDuplicateNumbers();
-//        app.saveDuplicatedCards();
-
-        app.removeDuplicateddCards();
-        app.saveCardsToFile();
-        /*
-        test
-         */
-//        System.out.println(app.cards.get(0).getName()+"\n\n"+app.cards.get(0).getPhoneNumber()+"\n\n"+app.cards.get(0).getContent());
     }
 }
