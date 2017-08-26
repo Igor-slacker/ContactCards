@@ -6,7 +6,7 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 
-public class Main {
+public class CardsCollection {
     private String filePath;
     private String duplicatedContactsFile = "/home/igor/duplicatedContacts";
     private Map<String, Integer> duplicatedCards;
@@ -113,7 +113,7 @@ public class Main {
     }
 
     public static void main(String[] args) throws IOException {
-        Main app = new Main();
+        CardsCollection app = new CardsCollection();
         app.gettingCards();
         app.gettingDuplicateNumbers();
 //        app.saveDuplicatedCards();
