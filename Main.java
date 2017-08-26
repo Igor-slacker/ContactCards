@@ -3,17 +3,24 @@ package igor.contactCards;
 import java.io.IOException;
 
 public class Main {
-    public static void main(String[] args) throws IOException {
-        CardsCollection mainCardsCollection = new CardsCollection();
-        mainCardsCollection.gettingCards();
-        mainCardsCollection.gettingDuplicateNumbers();
+    public static void processDuplicatedCards(CardsCollection cardsCollection) throws IOException {
+        cardsCollection.gettingCards();
+        cardsCollection.gettingDuplicateNumbers();
 //        mainCardsCollection.saveDuplicatedCards();
 
-        mainCardsCollection.removeDuplicateddCards();
-        mainCardsCollection.saveCardsToFile();
+        cardsCollection.removeDuplicateddCards();
+        cardsCollection.saveCardsToFile();
         /*
         test
          */
 //        System.out.println(mainCardsCollection.cards.get(0).getName()+"\n\n"+mainCardsCollection.cards.get(0).getPhoneNumber()+"\n\n"+mainCardsCollection.cards.get(0).getContent());
+
     }
+
+    public static void main(String[] args) throws IOException {
+        CardsCollection mainCardsCollection = new CardsCollection();
+        processDuplicatedCards(mainCardsCollection);
+
+
+        }
 }
