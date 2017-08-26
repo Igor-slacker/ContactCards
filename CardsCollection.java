@@ -10,6 +10,10 @@ public class CardsCollection {
     private List<String> duplicatedCards;
     private List<Card> cards = new LinkedList<>();
 
+    public List<Card> getCards() {
+        return cards;
+    }
+
     public void gettingCards() throws IOException {
         BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
 
