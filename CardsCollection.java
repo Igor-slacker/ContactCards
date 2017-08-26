@@ -84,7 +84,6 @@ public class CardsCollection {
         }
     }
 
-
     public void removeDuplicateddCards() throws IOException {
         BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
         System.out.println("Choose indexes of the cards(separated by comma) which you want to remove\n" +
@@ -101,6 +100,15 @@ public class CardsCollection {
                 }
 
                 removeSelectedCards(indexes);
+            }
+        }
+    }
+
+    public void removeAllDuplicateddCards() {
+        for (String phoneNumber : duplicatedCards) {
+            for (Card card : cards) {
+                if (card.getPhoneNumber().equals(phoneNumber))
+                    removeSelectedCards(cards.indexOf(card));
             }
         }
     }
